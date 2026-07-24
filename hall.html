@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Union Books — Local 4663</title>
+  <meta name="description" content="Local 4663 Union Books. Hold $HOOD. Collect union dividends in stocks — not more $HOOD.">
+  <link rel="icon" href="assets/HoodstersLogoWhite.png" type="image/png">
+  <link rel="stylesheet" href="css/union.css">
+</head>
+<body>
+  <!--
+    Information architecture mirrors a modern distribution app (e.g. Index):
+    Hero → Aggregate stats → Latest distribution → Personal record →
+    Protocol metrics → Supported assets → Recent distributions → Disclaimer
+    Visual language: 1970s membership organization / ledger / official records.
+  -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/HoodstersLogoWhite.png" alt="" width="34" height="34">
+        <span>Local 4663 · $HOOD</span>
+      </a>
+      <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">
+        Menu
+      </button>
+      <div class="nav-collapse" id="site-nav" data-nav-collapse>
+        <nav class="nav" aria-label="Primary">
+          <a href="hall.html" class="is-active">Books</a>
+          <a href="swap.html">Swap</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="distributions.html">Distributions</a>
+          <a href="docs.html">Docs</a>
+        </nav>
+        <div class="nav-actions">
+          <button type="button" class="btn btn-sm" data-nav-clock>Clock in</button>
+          <a class="btn btn-sm btn-secondary" href="swap.html" id="buy-hood" data-buy-hood>Buy $HOOD</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="doc">
+
+    <!-- 1. HERO — value proposition -->
+    <section class="hero" id="hero">
+      <p class="local-line">International Brotherhood of Hoodsters · Local 4663</p>
+      <h1>Hold $HOOD.<br>Collect union dividends<br>in stocks — not more $HOOD.</h1>
+      <p class="lede">
+        Buys and sells pay a <span data-config="fee">3.5%</span> dues fee into the treasury. The treasury
+        buys stock tokens. Any member holding $HOOD receives pro-rata dividend runs about every
+        <span data-config="interval">30 minutes</span> — <strong>no minimum holdings</strong>.
+      </p>
+      <div class="btn-row">
+        <button type="button" class="btn" data-clock-in>Clock in</button>
+        <a class="btn btn-secondary" href="swap.html" id="buy-hood-hero" data-buy-hood>Buy $HOOD</a>
+      </div>
+      <p class="link-row" style="margin-top:12px;">
+        <a href="docs.html#fees">The fee story →</a>
+      </p>
+    </section>
+
+    <!-- 2. UNION BOOKS — live statement of accounts -->
+    <section class="section tight" id="statement" aria-labelledby="statement-title">
+      <div class="form-head">
+        <span class="form-id">Form 4663-A · Union Books</span>
+        <span class="form-meta">Statement of accounts</span>
+      </div>
+      <h2 class="section-title" id="statement-title">Union Books</h2>
+      <p class="section-note">
+        Official hall records: value paid in stock tokens, dues taken in, card-carrying roll,
+        and the next scheduled run. When live, every figure is read from public chain sources —
+        not an admin spreadsheet.
+      </p>
+
+      <div class="statement">
+        <div class="statement-banner">Local 4663 · Union Books · Statement of accounts</div>
+        <div class="statement-grid">
+          <div class="statement-cell">
+            <div class="statement-label">Total paid</div>
+            <div class="statement-value accent" data-metric="totalPaid">—</div>
+            <div class="statement-hint">Stock dividends distributed</div>
+          </div>
+          <div class="statement-cell">
+            <div class="statement-label">Dues collected</div>
+            <div class="statement-value" data-metric="dues">—</div>
+            <div class="statement-hint">Trade fees → treasury</div>
+          </div>
+          <div class="statement-cell">
+            <div class="statement-label">Card-carrying members</div>
+            <div class="statement-value" data-metric="members">—</div>
+            <div class="statement-hint">Roll · any positive $HOOD</div>
+          </div>
+          <div class="statement-cell">
+            <div class="statement-label">Next dividend run</div>
+            <div class="statement-value" data-metric="nextRun">—</div>
+            <div class="statement-hint">Cadence · ~<span data-config="interval">30 minutes</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. LATEST DISTRIBUTION — Index: latest distribution block -->
+    <section class="section" id="latest-run" aria-labelledby="latest-title">
+      <div class="form-head">
+        <span class="form-id">Form 4663-B · Latest dividend run</span>
+        <span class="form-meta">Most recent posting</span>
+      </div>
+      <h2 class="section-title" id="latest-title">Latest dividend run</h2>
+      <p class="run-meta">
+        <span data-config="basket">Mag8</span> paid this run · Members:
+        <strong data-latest-members>0</strong>
+      </p>
+      <ul class="run-list" data-latest-run></ul>
+    </section>
+
+    <!-- 4. PERSONAL PANEL — Index: balance / share / stocks earned -->
+    <section class="section" id="membership" aria-labelledby="membership-title">
+      <div class="form-head">
+        <span class="form-id">Form 4663-C · Membership office</span>
+        <span class="form-meta">Personal record</span>
+      </div>
+      <h2 class="section-title" id="membership-title">Your membership record</h2>
+      <p class="section-note">
+        Where a modern app shows balance, share, and earnings — here it is your membership card
+        and hall record. Clock in to verify.
+      </p>
+
+      <div class="office">
+        <div>
+          <div class="member-card-frame is-blank" data-card-blank>
+            <img src="assets/IBHmembercard.png" alt="IBH membership card (not verified)">
+          </div>
+          <div class="member-card-frame hidden" data-card-live>
+            <img src="assets/IBHmembercard.png" alt="IBH membership card">
+          </div>
+        </div>
+
+        <div>
+          <div class="member-panel" data-member-disconnected>
+            <div class="panel-banner">Membership office</div>
+            <div class="panel-body">
+              <h3>Membership not verified</h3>
+              <span class="status-chip">Awaiting clock-in</span>
+              <p class="muted" style="font-size:12px;margin:0 0 16px;">
+                Clock in to load balance, share of the hall, dividend value, and stocks earned.
+              </p>
+              <button type="button" class="btn" data-clock-in>Clock in</button>
+            </div>
+          </div>
+
+          <div class="member-panel hidden" data-member-connected>
+            <div class="panel-banner">Membership verified</div>
+            <div class="panel-body">
+              <h3>Member file</h3>
+              <span class="status-chip good" data-field="status">Member in good standing</span>
+              <ul class="field-list">
+                <li><span class="k">Member</span><span class="v" data-field="memberName">—</span></li>
+                <li><span class="k">Member since</span><span class="v" data-field="memberSince">—</span></li>
+                <li><span class="k">Card number</span><span class="v" data-field="cardNumber">—</span></li>
+                <li><span class="k">Record</span><span class="v" data-field="address">—</span></li>
+                <li><span class="k">$HOOD balance</span><span class="v" data-field="hoodBalance">—</span></li>
+                <li><span class="k">Dues</span><span class="v" data-field="dues">—</span></li>
+                <li><span class="k">Share %</span><span class="v gold" data-field="share">—</span></li>
+                <li><span class="k">Dividend value</span><span class="v gold" data-field="dividendValue">—</span></li>
+              </ul>
+              <div class="stocks-earned">
+                Stocks earned
+                <ul data-stocks-earned></ul>
+              </div>
+              <div class="btn-row">
+                <button type="button" class="btn btn-secondary" data-clock-in>Clock out</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. UNION BOOKS DETAIL — price / holders / fees / countdown -->
+    <section class="section" id="books-detail" aria-labelledby="books-title">
+      <div class="form-head">
+        <span class="form-id">Form 4663-D · Union Books · detail</span>
+        <span class="form-meta">From contract &amp; pool reads</span>
+      </div>
+      <h2 class="section-title" id="books-title">Hall metrics</h2>
+      <p class="section-note">
+        Supporting books: unit price, membership count, treasury, dues collected, next distribution.
+      </p>
+      <div class="metrics cols-5">
+        <div class="metric">
+          <div class="metric-label">$HOOD price</div>
+          <div class="metric-value" data-metric="hoodPrice">—</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Members</div>
+          <div class="metric-value" data-metric="members">—</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Treasury</div>
+          <div class="metric-value" data-metric="treasury">—</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Fees collected</div>
+          <div class="metric-value" data-metric="fees">—</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Next distribution</div>
+          <div class="metric-value" data-metric="nextDist">—</div>
+        </div>
+      </div>
+      <p class="link-row">
+        <a href="distributions.html">View all distributions →</a>
+      </p>
+    </section>
+
+    <!-- 6. SUPPORTED STOCKS — Index: supported stocks grid -->
+    <section class="section" id="basket" aria-labelledby="basket-title">
+      <div class="form-head">
+        <span class="form-id">Form 4663-E · Dividend board</span>
+        <span class="form-meta">Posted notices</span>
+      </div>
+      <h2 class="section-title" id="basket-title">
+        <span data-config="basket">Mag8</span> stock tokens
+      </h2>
+      <p class="section-note">
+        Treasury dues buy the <span data-config="basket">Mag8</span> basket
+        (GOOGL, AMZN, AAPL, META, MSFT, NFLX, NVDA, TSLA). Posted in the hall like official
+        notices — not market tickers for sport.
+      </p>
+      <div class="board" data-dividend-board></div>
+    </section>
+
+    <!-- 7. RECENT DISTRIBUTIONS — Index: recent distributions table -->
+    <section class="section" id="treasury-ledger" aria-labelledby="ledger-title">
+      <div class="form-head">
+        <span class="form-id">Form 4663-F · Treasury ledger</span>
+        <span class="form-meta">Recent postings</span>
+      </div>
+      <h2 class="section-title" id="ledger-title">Recent distributions</h2>
+      <p class="section-note">
+        Stocks earned by eligible members. Full history under Distributions.
+      </p>
+
+      <div class="table-wrap desktop-only">
+        <table class="ledger">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Assets</th>
+              <th>Members paid</th>
+              <th>Transaction</th>
+            </tr>
+          </thead>
+          <tbody data-ledger-body="payouts"></tbody>
+        </table>
+      </div>
+      <div class="ledger-cards" data-ledger-cards="payouts"></div>
+
+      <div class="btn-row">
+        <a class="btn" href="distributions.html">Open distributions</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 8. DISCLAIMER — Index footer legal -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p class="mark">Local 4663 · International Brotherhood of Hoodsters</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="hall.html">Books</a>
+        <a href="swap.html">Swap</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="distributions.html">Distributions</a>
+        <a href="docs.html">Docs</a>
+        <a href="#" data-union-hall target="_blank" rel="noopener noreferrer">Union Hall</a>
+        <a href="pledge/">Pledge</a>
+      </nav>
+      <p>
+        Informational only; not financial, legal, tax, or investment advice.
+        Distributions are tokenized stock tokens, not brokerage shares; they do not grant
+        voting rights in the underlying issuers and may not include traditional cash dividends.
+      </p>
+      <p>
+        Liquidity may be limited and prices can move materially.
+        Buys and sells include a 3.5% distribution fee in addition to pool fees shown in any exchange quote.
+      </p>
+      <p>Operates on Robinhood Chain. © Local 4663</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+  <script src="js/mock-data.js?v=testnet"></script>
+  <script src="js/chain.js?v=testnet"></script>
+  <script src="js/wallet.js?v=testnet"></script>
+  <script src="js/live.js?v=testnet"></script>
+  <script src="js/hall.js?v=testnet"></script>
+</body>
+</html>

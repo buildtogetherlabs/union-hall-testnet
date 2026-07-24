@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Local 4663</title>
+  <meta name="description" content="Your Local 4663 membership portfolio — $HOOD balance, stocks earned, and membership dividend receipts.">
+  <link rel="icon" href="assets/HoodstersLogoWhite.png" type="image/png">
+  <link rel="stylesheet" href="css/union.css?v=testnet">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/HoodstersLogoWhite.png" alt="" width="34" height="34">
+        <span>Local 4663 · $HOOD</span>
+      </a>
+      <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">
+        Menu
+      </button>
+      <div class="nav-collapse" id="site-nav" data-nav-collapse>
+        <nav class="nav" aria-label="Primary">
+          <a href="hall.html">Books</a>
+          <a href="swap.html">Swap</a>
+          <a href="portfolio.html" class="is-active">Portfolio</a>
+          <a href="distributions.html">Distributions</a>
+          <a href="docs.html">Docs</a>
+        </nav>
+        <div class="nav-actions">
+          <button type="button" class="btn btn-sm" data-nav-clock>Clock in</button>
+          <a class="btn btn-sm btn-secondary" href="swap.html" data-buy-hood>Buy $HOOD</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="doc">
+    <section class="hero">
+      <p class="local-line">Form 4663-P · Membership portfolio</p>
+      <h1>Your portfolio</h1>
+      <p class="lede">
+        Personal record for the connected member: $HOOD position, hall share, estimated yield,
+        and your membership dividend receipt. Dividends arrive as stock tokens —
+        not more $HOOD.
+      </p>
+    </section>
+
+    <!-- Clocked out -->
+    <section class="section" style="border-top: none; padding-top: 0;" data-clocked-out-only>
+      <div class="member-panel">
+        <div class="panel-banner">Membership office</div>
+        <div class="panel-body">
+          <h3>Membership not verified</h3>
+          <span class="status-chip">Awaiting clock-in</span>
+          <p class="muted" style="font-size:12px;margin:0 0 16px;">
+            Clock in with MetaMask on Robinhood Chain Testnet (46630) to load your live $HOOD balance
+            and hall share. Stock dividend history is still demo until distribution events are indexed.
+          </p>
+          <button type="button" class="btn" data-clock-in>Clock in with wallet</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clocked in -->
+    <div data-clocked-only class="hidden">
+      <section class="section" style="border-top: none; padding-top: 0;">
+        <div class="form-head">
+          <span class="form-id">Member summary</span>
+          <span class="form-meta">Live file</span>
+        </div>
+
+        <div class="portfolio-strip">
+          <div class="portfolio-cell">
+            <div class="label">$HOOD balance</div>
+            <div class="value accent" data-field="hoodBalance">—</div>
+          </div>
+          <div class="portfolio-cell">
+            <div class="label">Est. value</div>
+            <div class="value" data-field="hoodValue">—</div>
+          </div>
+          <div class="portfolio-cell">
+            <div class="label">Share of hall</div>
+            <div class="value" data-field="share">—</div>
+          </div>
+          <div class="portfolio-cell">
+            <div class="label">Stocks earned (value)</div>
+            <div class="value accent" data-field="dividendValue">—</div>
+          </div>
+        </div>
+
+        <div class="office">
+          <div>
+            <div class="member-card-frame" data-card-live>
+              <img src="assets/IBHmembercard.png" alt="IBH membership card">
+            </div>
+            <div class="member-card-frame is-blank hidden" data-card-blank>
+              <img src="assets/IBHmembercard.png" alt="IBH membership card (not verified)">
+            </div>
+          </div>
+          <div class="member-panel" data-member-connected>
+            <div class="panel-banner">Membership verified</div>
+            <div class="panel-body">
+              <h3>Member file</h3>
+              <span class="status-chip good" data-field="status">Member in good standing</span>
+              <ul class="field-list">
+                <li><span class="k">Member</span><span class="v" data-field="memberName">—</span></li>
+                <li><span class="k">Member since</span><span class="v" data-field="memberSince">—</span></li>
+                <li><span class="k">Card number</span><span class="v" data-field="cardNumber">—</span></li>
+                <li><span class="k">Record</span><span class="v" data-field="address">—</span></li>
+                <li><span class="k">Dues</span><span class="v" data-field="dues">—</span></li>
+              </ul>
+              <div class="btn-row">
+                <button type="button" class="btn btn-secondary" data-clock-in>Clock out</button>
+                <a class="btn" href="swap.html" data-buy-hood>Buy $HOOD</a>
+              </div>
+            </div>
+          </div>
+          <div class="member-panel hidden" data-member-disconnected>
+            <div class="panel-banner">Membership office</div>
+            <div class="panel-body">
+              <h3>Membership not verified</h3>
+              <button type="button" class="btn" data-clock-in>Clock in</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="receipt-title">
+        <div class="form-head">
+          <span class="form-id">Form 4663-R · Membership dividend receipt</span>
+          <span class="form-meta">Live position · yield desk</span>
+        </div>
+        <h2 class="section-title" id="receipt-title">Membership dividend receipt</h2>
+        <p class="section-note">
+          Live view of your position — hall share, Mag8 stocks on the books, and an estimated
+          yield from dues volume. Not a slip for a single distribution run (those live under
+          Receipt history). Estimates move with volume, price, and eligible supply.
+        </p>
+        <!--
+          Form 4663-R · Membership Dividend Receipt (position view)
+          Live position + BANG-style yield calculator (position · daily volume →
+          day / month / year / APY / share). Per-run slips stay in receipt history.
+        -->
+        <div class="receipt receipt-position" data-dividend-receipt data-receipt-state="empty">
+          <header class="receipt-banner">
+            <div class="receipt-banner-text">
+              <div class="receipt-banner-title">Local 4663 · Dividend receipt</div>
+              <div class="receipt-banner-form">Form 4663-R · Position</div>
+            </div>
+            <span
+              class="receipt-stamp is-empty"
+              data-receipt="status_stamp"
+              data-token="status_stamp"
+              aria-label="Membership status"
+            >—</span>
+          </header>
+
+          <div class="receipt-body">
+            <div class="receipt-meta" role="list">
+              <div class="receipt-row" role="listitem">
+                <span class="k">Member</span>
+                <span class="v" data-receipt="member_name" data-token="member_name" data-field="memberName">—</span>
+              </div>
+              <div class="receipt-row" role="listitem">
+                <span class="k">Card number</span>
+                <span class="v" data-receipt="card_number" data-token="card_number" data-field="cardNumber">—</span>
+              </div>
+              <div class="receipt-row" role="listitem">
+                <span class="k">Record</span>
+                <span class="v v-record" data-receipt="record" data-token="record" data-field="address">—</span>
+              </div>
+              <div class="receipt-row" role="listitem">
+                <span class="k">$HOOD position</span>
+                <span class="v" data-receipt="hood_position" data-field="hoodBalance">—</span>
+              </div>
+              <div class="receipt-row" role="listitem">
+                <span class="k">Position value</span>
+                <span class="v v-value" data-receipt="position_value" data-field="hoodValue">—</span>
+              </div>
+              <div class="receipt-row" role="listitem">
+                <span class="k">Share of hall</span>
+                <span class="v v-value" data-receipt="share" data-field="share">—</span>
+              </div>
+              <div class="receipt-row" role="listitem">
+                <span class="k">Stocks earned</span>
+                <span class="v v-value" data-receipt="stocks_value" data-field="dividendValue">—</span>
+              </div>
+            </div>
+
+            <!-- Yield calculator · position + daily volume (BANG-style) -->
+            <div class="yield-calc" data-yield-calc>
+              <div class="receipt-assets-label">Yield calculator · what you’d earn</div>
+              <div class="yc-inputs">
+                <label class="yc-field">
+                  <span>Your position ($HOOD)</span>
+                  <span class="yc-inwrap">
+                    <span class="yc-pfx">HOOD</span>
+                    <input
+                      id="yc-position"
+                      class="yc-input"
+                      type="number"
+                      inputmode="decimal"
+                      min="0"
+                      step="any"
+                      data-yc-position
+                      value="500000"
+                      aria-label="Your $HOOD position"
+                    >
+                  </span>
+                </label>
+                <label class="yc-field">
+                  <span>Daily volume (USD)</span>
+                  <span class="yc-inwrap">
+                    <span class="yc-pfx">$</span>
+                    <input
+                      id="yc-volume"
+                      class="yc-input"
+                      type="number"
+                      inputmode="decimal"
+                      min="0"
+                      step="any"
+                      data-yc-volume
+                      value="25000"
+                      aria-label="Assumed daily trading volume in USD"
+                    >
+                  </span>
+                </label>
+              </div>
+              <div class="yc-out" data-yc-out>
+                <div class="yc-big">
+                  <span data-yc-month>—</span><span class="yc-unit">/ month</span>
+                </div>
+                <div class="yc-grid">
+                  <div><span class="yc-k">Per day</span><span class="yc-v" data-yc-day>—</span></div>
+                  <div><span class="yc-k">Per year</span><span class="yc-v" data-yc-year>—</span></div>
+                  <div><span class="yc-k">Est. APY</span><span class="yc-v yc-accent" data-yc-apy>—</span></div>
+                  <div><span class="yc-k">Your share</span><span class="yc-v" data-yc-share>—</span></div>
+                </div>
+                <p class="yc-note" data-yc-note>
+                  Estimate from dues fee on volume. Real payouts move with volume, price, and eligible supply.
+                </p>
+              </div>
+            </div>
+
+            <div class="receipt-assets" data-receipt="assets_block">
+              <div class="receipt-assets-label">Mag8 position · stocks on the books</div>
+              <table class="receipt-table" aria-label="Mag8 stock tokens held">
+                <thead>
+                  <tr>
+                    <th scope="col">Ticker</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Est. value</th>
+                  </tr>
+                </thead>
+                <tbody data-receipt="assets" data-token="assets">
+                  <!-- rows filled by hall.js from stocksEarned (lifetime position) -->
+                </tbody>
+              </table>
+              <div class="receipt-empty hidden" data-receipt="empty_msg" hidden>
+                <p>No position on file.</p>
+                <p>Clock in to load your membership dividend receipt.</p>
+              </div>
+            </div>
+
+            <p class="receipt-note">
+              Tokenized stock tokens · not brokerage shares · no issuer voting rights.
+              Yield figures are illustrative estimates, not guarantees.
+            </p>
+            <p class="receipt-tx">
+              <a href="#your-dist-title">Open receipt history →</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="holdings-title">
+        <div class="form-head">
+          <span class="form-id">Form 4663-P2 · Holdings</span>
+          <span class="form-meta">Stock tokens earned</span>
+        </div>
+        <h2 class="section-title" id="holdings-title">Stocks earned</h2>
+        <p class="section-note">
+          Tokenized stock tokens received from dividend runs (lifetime tally for this member).
+          Not brokerage shares; no issuer voting rights implied.
+        </p>
+        <div class="board" data-portfolio-holdings></div>
+      </section>
+
+      <section class="section" aria-labelledby="your-dist-title">
+        <div class="form-head">
+          <span class="form-id">Form 4663-P3 · Receipt history</span>
+          <span class="form-meta">Personal postings</span>
+        </div>
+        <h2 class="section-title" id="your-dist-title">Receipt history</h2>
+        <p class="section-note">
+          Each row is a past membership dividend posting for this member (one distribution run).
+          Opens the on-chain transaction when live. The live position is on Form 4663-R above.
+        </p>
+
+        <div class="table-wrap desktop-only">
+          <table class="ledger">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Assets</th>
+                <th>Value</th>
+                <th>Transaction</th>
+              </tr>
+            </thead>
+            <tbody data-ledger-body="member-dist"></tbody>
+          </table>
+        </div>
+        <div class="ledger-cards" data-ledger-cards="member-dist"></div>
+
+        <p class="link-row">
+          <a href="distributions.html">Hall-wide distributions &amp; purchases →</a>
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p class="mark">Local 4663 · International Brotherhood of Hoodsters</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="hall.html">Books</a>
+        <a href="swap.html">Swap</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="distributions.html">Distributions</a>
+        <a href="docs.html">Docs</a>
+        <a href="#" data-union-hall target="_blank" rel="noopener noreferrer">Union Hall</a>
+        <a href="pledge/">Pledge</a>
+      </nav>
+      <p>
+        Informational only; not financial, legal, tax, or investment advice.
+        Portfolio figures are estimates from contract and pool reads.
+      </p>
+      <p>Operates on Robinhood Chain. © Local 4663</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+  <script src="js/mock-data.js?v=testnet"></script>
+  <script src="js/chain.js?v=testnet"></script>
+  <script src="js/wallet.js?v=testnet"></script>
+  <script src="js/live.js?v=testnet"></script>
+  <script src="js/hall.js?v=testnet"></script>
+</body>
+</html>

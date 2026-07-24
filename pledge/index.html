@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pledge Tribute — Local 4663</title>
+  <link rel="icon" href="../assets/HoodstersLogoWhite.png" type="image/png">
+  <link rel="stylesheet" href="../css/union.css">
+  <style>
+    .pledge-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px 48px;
+    }
+    .pledge-page .panel {
+      max-width: min(440px, 100%);
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .pledge-page .member-card {
+      width: 100%;
+      mix-blend-mode: multiply;
+      user-select: none;
+    }
+    .pledge-page .back {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      color: var(--burgundy);
+      font-size: 14px;
+      text-decoration: none;
+      z-index: 2;
+    }
+    .pledge-page .back:hover {
+      text-decoration: underline;
+    }
+    .pledge-page .btn {
+      margin-top: 24px;
+      min-width: 280px;
+    }
+    .pledge-page .btn.is-copied {
+      opacity: 0.9;
+    }
+    .pledge-links {
+      margin-top: 24px;
+      font-size: 13px;
+    }
+    .pledge-links a {
+      margin: 0 8px;
+    }
+  </style>
+</head>
+<body>
+  <a class="back" href="../index.html">← Local 4663</a>
+
+  <main class="pledge-page">
+    <div class="panel">
+      <img
+        class="member-card"
+        src="../assets/IBHmembercard.png"
+        alt="IBH membership card"
+      >
+      <button type="button" class="btn" id="pledge-btn" aria-label="Pledge Tribute — copy address">
+        Pledge tribute
+      </button>
+      <div class="pledge-links muted">
+        <a href="../hall.html">Open Union Books</a>
+        ·
+        <a href="../index.html">Home</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/pledge.js"></script>
+</body>
+</html>

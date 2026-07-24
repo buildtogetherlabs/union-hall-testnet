@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swap — Local 4663</title>
+  <meta name="description" content="Swap for $HOOD on Robinhood Chain. Local 4663 exchange desk.">
+  <link rel="icon" href="assets/HoodstersLogoWhite.png" type="image/png">
+  <link rel="stylesheet" href="css/union.css?v=testnet">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/HoodstersLogoWhite.png" alt="" width="34" height="34">
+        <span>Local 4663 · $HOOD</span>
+      </a>
+      <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">
+        Menu
+      </button>
+      <div class="nav-collapse" id="site-nav" data-nav-collapse>
+        <nav class="nav" aria-label="Primary">
+          <a href="hall.html">Books</a>
+          <a href="swap.html" class="is-active">Swap</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="distributions.html">Distributions</a>
+          <a href="docs.html">Docs</a>
+        </nav>
+        <div class="nav-actions">
+          <button type="button" class="btn btn-sm" data-nav-clock>Clock in</button>
+          <a class="btn btn-sm btn-secondary" href="swap.html" data-buy-hood>Buy $HOOD</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="doc">
+    <section class="hero">
+      <p class="local-line">Form 4663-S · Exchange desk</p>
+      <h1>Swap for $HOOD</h1>
+      <p class="lede">
+        Acquire $HOOD on <span data-config="chain">Robinhood Chain Testnet</span>.
+        Any $HOOD holder is eligible for pro-rata dividend runs
+        (~<span data-config="interval">30 minutes</span>) — no minimum holdings.
+        Dividends pay Mag8 stock tokens — not more $HOOD.
+      </p>
+      <div class="btn-row" style="margin-top:12px;">
+        <button type="button" class="btn btn-sm" data-wallet-connect>Connect wallet</button>
+        <span class="muted" style="font-size:12px;align-self:center;" data-wallet-label>Not connected</span>
+      </div>
+      <p class="section-note" style="margin-top:10px;">
+        <span data-live-eth-note></span>
+        <span data-live-hood-note style="margin-left:12px;"></span>
+      </p>
+      <p class="section-note" style="margin-top:6px;">
+        Testnet only · chain id <strong>46630</strong> · faucet
+        <a href="https://faucet.testnet.chain.robinhood.com/" target="_blank" rel="noopener">here</a>.
+        Liquidity is thin — use small amounts (e.g. 0.0001 ETH).
+      </p>
+    </section>
+
+    <!-- Pre-launch closed (hidden when launched) -->
+    <section class="section hidden" style="border-top: none; padding-top: 0;" data-swap-closed>
+      <div class="closed-notice">
+        <div class="panel-banner">Exchange desk · Status</div>
+        <div class="panel-body">
+          <div class="stamp-closed">Closed until launch</div>
+          <h3>Window not open</h3>
+          <p>The $HOOD pool is not live yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live swap desk -->
+    <section class="section" style="border-top: none; padding-top: 0;" data-swap-open>
+      <div class="form-head">
+        <span class="form-id">Live market · testnet</span>
+        <span class="form-meta">ETH → $HOOD</span>
+      </div>
+      <p class="section-note">
+        MetaMask swaps against the Uniswap v4 ETH/$HOOD pool. Buys include a
+        <span data-config="fee">3.5%</span> distribution fee to the treasury (plus pool fees).
+      </p>
+
+      <div class="swap-desk">
+        <div class="panel-banner">Official exchange slip</div>
+        <div class="panel-body">
+          <form data-swap-form>
+            <div class="swap-field">
+              <label for="swap-pay">You pay</label>
+              <div class="swap-field-row">
+                <input id="swap-pay" data-swap-pay type="number" min="0" step="any" placeholder="0.0001" inputmode="decimal">
+                <span class="swap-token">ETH</span>
+              </div>
+            </div>
+            <div class="swap-arrow" aria-hidden="true">↓</div>
+            <div class="swap-field">
+              <label for="swap-get">You receive (est.)</label>
+              <div class="swap-field-row">
+                <input id="swap-get" data-swap-get type="text" placeholder="0.0" readonly tabindex="-1">
+                <span class="swap-token">$HOOD</span>
+              </div>
+            </div>
+            <div class="swap-meta">
+              <p data-swap-rate>Enter an ETH amount for an estimate</p>
+              <p data-swap-fee-note></p>
+              <p class="swap-status" data-swap-status></p>
+            </div>
+            <button type="submit" class="btn">Swap for $HOOD</button>
+          </form>
+        </div>
+      </div>
+
+      <p class="link-row" style="margin-top: 20px;">
+        <a href="docs.html#fees">How fees fund dividends →</a>
+        ·
+        <a href="https://explorer.testnet.chain.robinhood.com/token/0xa73533aD0002DAb67b5E22afcC07760f12b097d4" target="_blank" rel="noopener">HOOD on explorer →</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p class="mark">Local 4663 · International Brotherhood of Hoodsters</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="hall.html">Books</a>
+        <a href="swap.html">Swap</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="distributions.html">Distributions</a>
+        <a href="docs.html">Docs</a>
+        <a href="#" data-union-hall target="_blank" rel="noopener noreferrer">Union Hall</a>
+        <a href="pledge/">Pledge</a>
+      </nav>
+      <p>
+        Informational only; not financial, legal, tax, or investment advice.
+        Swaps may include pool fees plus the 3.5% distribution fee on buys and sells.
+      </p>
+      <p>Operates on Robinhood Chain. © Local 4663</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+  <script src="js/mock-data.js?v=testnet"></script>
+  <script src="js/chain.js?v=testnet"></script>
+  <script src="js/wallet.js?v=testnet"></script>
+  <script src="js/live.js?v=testnet"></script>
+  <script src="js/hall.js?v=testnet"></script>
+  <script src="js/swap-live.js?v=testnet"></script>
+</body>
+</html>

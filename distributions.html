@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distributions — Local 4663</title>
+  <meta name="description" content="Distribution and purchase history for Local 4663. Each row links to its transaction.">
+  <link rel="icon" href="assets/HoodstersLogoWhite.png" type="image/png">
+  <link rel="stylesheet" href="css/union.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/HoodstersLogoWhite.png" alt="" width="34" height="34">
+        <span>Local 4663 · $HOOD</span>
+      </a>
+      <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">
+        Menu
+      </button>
+      <div class="nav-collapse" id="site-nav" data-nav-collapse>
+        <nav class="nav" aria-label="Primary">
+          <a href="hall.html">Books</a>
+          <a href="swap.html">Swap</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="distributions.html" class="is-active">Distributions</a>
+          <a href="docs.html">Docs</a>
+        </nav>
+        <div class="nav-actions">
+          <button type="button" class="btn btn-sm" data-nav-clock>Clock in</button>
+          <a class="btn btn-sm btn-secondary" href="swap.html" data-buy-hood>Buy $HOOD</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="doc">
+    <section class="hero">
+      <p class="local-line">Form 4663-L · Treasury ledger</p>
+      <h1>Distributions</h1>
+      <p class="lede">
+        Dividend runs to any member holding $HOOD (no minimum),
+        treasury stock purchases funded by sell-fee dues, and (when clocked in) your
+        membership dividend receipts and $HOOD purchases. Every row links to its on-chain transaction.
+      </p>
+    </section>
+
+    <section class="section" style="border-top: none; padding-top: 0;" data-tab-group>
+      <div class="form-head">
+        <span class="form-id">All postings</span>
+        <span class="form-meta">Click a row to open the transaction</span>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab is-active" data-tab="payouts" role="tab">Dividend runs</button>
+        <button type="button" class="tab" data-tab="buys" role="tab">Treasury buys</button>
+        <button type="button" class="tab" data-tab="yours" role="tab">Your activity</button>
+      </div>
+
+      <div class="tab-panel is-active" data-tab-panel="payouts" role="tabpanel">
+        <p class="section-note">
+          Hall-wide pro-rata distributions to all $HOOD holders.
+        </p>
+        <div class="table-wrap desktop-only">
+          <table class="ledger">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Assets</th>
+                <th>Members paid</th>
+                <th>Transaction</th>
+              </tr>
+            </thead>
+            <tbody data-ledger-body="payouts"></tbody>
+          </table>
+        </div>
+        <div class="ledger-cards" data-ledger-cards="payouts"></div>
+      </div>
+
+      <div class="tab-panel" data-tab-panel="buys" role="tabpanel">
+        <p class="section-note">
+          Stock tokens acquired by the treasury with collected trade fees (dues).
+        </p>
+        <div class="table-wrap desktop-only">
+          <table class="ledger">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Assets</th>
+                <th>Notes</th>
+                <th>Transaction</th>
+              </tr>
+            </thead>
+            <tbody data-ledger-body="buys"></tbody>
+          </table>
+        </div>
+        <div class="ledger-cards" data-ledger-cards="buys"></div>
+      </div>
+
+      <div class="tab-panel" data-tab-panel="yours" role="tabpanel">
+        <div data-clocked-out-only>
+          <div class="member-panel" style="max-width: 480px;">
+            <div class="panel-banner">Personal ledger</div>
+            <div class="panel-body">
+              <h3>Clock in required</h3>
+              <span class="status-chip">Awaiting clock-in</span>
+              <p class="muted" style="font-size:12px;margin:0 0 16px;">
+                Clock in to see your dividend receipts and $HOOD purchase history.
+              </p>
+              <button type="button" class="btn" data-clock-in>Clock in</button>
+            </div>
+          </div>
+        </div>
+
+        <div data-clocked-only class="hidden">
+          <p class="section-note">Your dividend receipts. Each row opens the transaction.</p>
+          <h3 class="section-title" style="font-size:16px;">Dividend receipts</h3>
+          <div class="table-wrap desktop-only">
+            <table class="ledger">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Assets</th>
+                  <th>Value</th>
+                  <th>Transaction</th>
+                </tr>
+              </thead>
+              <tbody data-ledger-body="member-dist"></tbody>
+            </table>
+          </div>
+          <div class="ledger-cards" data-ledger-cards="member-dist"></div>
+
+          <h3 class="section-title" style="font-size:16px;margin-top:28px;">$HOOD purchases</h3>
+          <p class="section-note">Swaps and acquisitions of $HOOD attributed to this member.</p>
+          <div class="table-wrap desktop-only">
+            <table class="ledger">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Detail</th>
+                  <th>Paid</th>
+                  <th>Transaction</th>
+                </tr>
+              </thead>
+              <tbody data-ledger-body="member-buys"></tbody>
+            </table>
+          </div>
+          <div class="ledger-cards" data-ledger-cards="member-buys"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="link-row">
+        <a href="docs.html#flow">How a distribution run works →</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p class="mark">Local 4663 · International Brotherhood of Hoodsters</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="hall.html">Books</a>
+        <a href="swap.html">Swap</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="distributions.html">Distributions</a>
+        <a href="docs.html">Docs</a>
+        <a href="#" data-union-hall target="_blank" rel="noopener noreferrer">Union Hall</a>
+        <a href="pledge/">Pledge</a>
+      </nav>
+      <p>
+        Informational only; not financial, legal, tax, or investment advice.
+        Distributions are tokenized stock tokens, not brokerage shares.
+      </p>
+      <p>Operates on Robinhood Chain. © Local 4663</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+  <script src="js/mock-data.js?v=testnet"></script>
+  <script src="js/chain.js?v=testnet"></script>
+  <script src="js/wallet.js?v=testnet"></script>
+  <script src="js/live.js?v=testnet"></script>
+  <script src="js/hall.js?v=testnet"></script>
+</body>
+</html>

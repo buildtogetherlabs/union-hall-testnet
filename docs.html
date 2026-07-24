@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docs — Local 4663</title>
+  <meta name="description" content="How Local 4663 distributions work — contracts, flows, and data sources.">
+  <link rel="icon" href="assets/HoodstersLogoWhite.png" type="image/png">
+  <link rel="stylesheet" href="css/union.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/HoodstersLogoWhite.png" alt="" width="34" height="34">
+        <span>Local 4663 · $HOOD</span>
+      </a>
+      <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">
+        Menu
+      </button>
+      <div class="nav-collapse" id="site-nav" data-nav-collapse>
+        <nav class="nav" aria-label="Primary">
+          <a href="hall.html">Books</a>
+          <a href="swap.html">Swap</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="distributions.html">Distributions</a>
+          <a href="docs.html" class="is-active">Docs</a>
+        </nav>
+        <div class="nav-actions">
+          <button type="button" class="btn btn-sm" data-nav-clock>Clock in</button>
+          <a class="btn btn-sm btn-secondary" href="swap.html" data-buy-hood>Buy $HOOD</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="doc">
+    <section class="hero">
+      <p class="local-line">Form 4663-D · Official brief</p>
+      <h1>How distributions work</h1>
+      <p class="lede">
+        One clean story: who pays, where dues go, who is eligible, and when the hall runs.
+        Written for members who want the books, not a sales pitch.
+      </p>
+    </section>
+
+    <section class="section" style="border-top: none; padding-top: 0;">
+      <nav class="docs-toc" aria-label="Table of contents">
+        <h3>Contents</h3>
+        <ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#fees">The fee story</a></li>
+          <li><a href="#flow">Dividend cycle</a></li>
+          <li><a href="#books">Union Books</a></li>
+          <li><a href="#receipts">Membership receipts</a></li>
+          <li><a href="#contracts">Contracts</a></li>
+          <li><a href="#data">Data sources</a></li>
+          <li><a href="#app">What the app shows</a></li>
+        </ol>
+      </nav>
+
+      <article class="docs-prose" id="overview">
+        <div class="form-head">
+          <span class="form-id">§1 · Overview</span>
+          <span class="form-meta">Local 4663</span>
+        </div>
+        <h2 class="section-title">Hold $HOOD. Collect union dividends in stocks — not more $HOOD.</h2>
+        <p>
+          Local 4663 runs a fee → buy → airdrop stack on
+          <strong>Robinhood Chain</strong> (chain id <code>4663</code>).
+          You hold $HOOD; when the hall runs, you receive
+          <strong>tokenized stock tokens</strong> (Mag8: GOOGL, AMZN, AAPL, META, MSFT, NFLX, NVDA, TSLA) — not additional $HOOD.
+        </p>
+        <p>
+          No staking, no claim ritual. Eligible card-carrying members are paid
+          pro-rata on the hall’s distribution cadence.
+        </p>
+      </article>
+
+      <article class="docs-prose section" id="fees">
+        <div class="form-head">
+          <span class="form-id">§2 · The fee story</span>
+          <span class="form-meta">Rules of the hall</span>
+        </div>
+        <h2 class="section-title">One clean story</h2>
+        <p>
+          Everything below is the official description of how dues fund dividends.
+          Pool LP fees may still apply on swaps; they are separate from the distribution fee.
+        </p>
+
+        <h3>1 · Who pays</h3>
+        <ul>
+          <li>
+            <strong>Buys and sells.</strong> A
+            <strong><span data-config="fee">3.5%</span> distribution fee</strong> is taken on
+            <em>both buys and sells</em> of $HOOD through the Uniswap V4 hook
+            (<code>IndexFeeHook</code>). The fee is collected in native ETH.
+          </li>
+          <li>
+            <strong>Pool LP fees are separate.</strong> Ordinary Uniswap pool fees may still
+            apply on top of the distribution fee.
+          </li>
+        </ul>
+
+        <h3>2 · Where it goes</h3>
+        <ul>
+          <li>
+            <strong>Hook → treasury.</strong> The distribution fee is routed to
+            <code>StockTreasury</code> (dues collected).
+          </li>
+          <li>
+            <strong>Treasury → stock buy.</strong> The treasury uses those dues to buy the
+            dividend basket of Mag8 stock tokens (GOOGL, AMZN, AAPL, META, MSFT, NFLX, NVDA, TSLA).
+          </li>
+          <li>
+            <strong>Distributor → members.</strong> Stock tokens move to
+            <code>StockDistributor</code>, which pays eligible members pro-rata on each run.
+          </li>
+        </ul>
+        <p class="flow-inline">
+          <strong>dues path:</strong>
+          trade fee → treasury → stock buy → distributor → member wallets
+        </p>
+
+        <h3>3 · Who is eligible</h3>
+        <ul>
+          <li>
+            <strong>No minimum holdings.</strong> Any wallet with a
+            <strong>positive $HOOD balance</strong> at snapshot / distribute time is eligible
+            for that run. Dust balances still count; share is pro-rata.
+          </li>
+          <li>
+            <strong>Share:</strong> each eligible member’s cut is proportional to their
+            $HOOD balance relative to the sum of all eligible balances.
+          </li>
+          <li>
+            <strong>Optional floor later:</strong> the protocol can raise a minimum later via
+            <code>setMinShareBalance</code> if needed — default today is
+            <strong><span data-config="minHood">any</span></strong> (zero floor).
+          </li>
+        </ul>
+
+        <h3>4 · Cadence</h3>
+        <ul>
+          <li>
+            <strong>Next run:</strong> distributions run on a fixed interval of about
+            <strong><span data-config="interval">30 minutes</span></strong>
+            (configured as <code>distributionInterval</code>).
+          </li>
+          <li>
+            Union Books shows <strong>Next dividend run</strong> from that schedule so members
+            can see when the books post next.
+          </li>
+          <li>
+            A run pays out stock tokens already acquired; if the treasury has not yet bought
+            for a cycle, the ledger will reflect that honestly when live chain reads are wired.
+          </li>
+        </ul>
+      </article>
+
+      <article class="docs-prose section" id="flow">
+        <div class="form-head">
+          <span class="form-id">§3 · Dividend cycle</span>
+          <span class="form-meta">Keeper flow</span>
+        </div>
+        <h2 class="section-title">From trade to member receipt</h2>
+        <ol class="flow-steps">
+          <li>
+            <strong>Dues collected</strong>
+            <span>A buy or sell of $HOOD hits the V4 pool. The hook routes the 3.5% ETH fee to the treasury.</span>
+          </li>
+          <li>
+            <strong>Treasury buys stock tokens</strong>
+            <span>
+              Keeper calls treasury / distributor buy paths (V4 and/or Rialto with USDG).
+              Stock tokens move to the distributor.
+            </span>
+          </li>
+          <li>
+            <strong>Interval elapsed</strong>
+            <span>
+              After the distribution interval
+              (~<span data-config="interval">30 minutes</span>), a new cycle may start.
+            </span>
+          </li>
+          <li>
+            <strong>Snapshot holders</strong>
+            <span>
+              Holder list is snapshotted from the reflection token
+              (any positive $HOOD, not excluded).
+            </span>
+          </li>
+          <li>
+            <strong>Distribute batch</strong>
+            <span>
+              <code>startCycle</code> → <code>distributeBatch</code> until every eligible
+              member has been paid pro-rata for that run.
+            </span>
+          </li>
+          <li>
+            <strong>Posted on the ledger</strong>
+            <span>
+              Transfers appear on the explorer. Union Books and Distributions list each run;
+              members can pull a membership dividend receipt for their share.
+            </span>
+          </li>
+        </ol>
+      </article>
+
+      <article class="docs-prose section" id="books">
+        <div class="form-head">
+          <span class="form-id">§4 · Union Books</span>
+          <span class="form-meta">The product</span>
+        </div>
+        <h2 class="section-title">The books are the product</h2>
+        <p>
+          <strong>Union Books</strong> is Local 4663’s live statement of accounts — not a
+          trading terminal. When chain wiring is live, figures read from public contracts
+          and explorers: no admin spreadsheet, no trust-me totals.
+        </p>
+        <ul>
+          <li><strong>Total paid</strong> — historical value of stock tokens distributed</li>
+          <li><strong>Dues collected</strong> — fees received by the treasury</li>
+          <li><strong>Card-carrying members</strong> — roll of holders with any positive $HOOD</li>
+          <li><strong>Next dividend run</strong> — countdown / scheduled window</li>
+        </ul>
+        <p>
+          Supporting metrics (price, treasury balance, fees, next distribution) and the
+          Distributions ledger sit under the same idea: official records of the local.
+        </p>
+        <p>
+          The <strong>Union Hall</strong> is the community room — our Telegram — not a tab
+          in this app. Books are the records; the Hall is where members gather.
+        </p>
+      </article>
+
+      <article class="docs-prose section" id="receipts">
+        <div class="form-head">
+          <span class="form-id">§5 · Membership receipts</span>
+          <span class="form-meta">Personal record</span>
+        </div>
+        <h2 class="section-title">Membership dividend receipt</h2>
+        <p>
+          After clock-in, a member can view a <strong>membership dividend receipt</strong>
+          for a run — styled like a hall slip, not a degen PnL card.
+        </p>
+        <ul>
+          <li>Card number and member record</li>
+          <li>Run time / period</li>
+          <li>Stock tokens received (per ticker) and estimated USD mark</li>
+          <li>Link to the on-chain transaction</li>
+        </ul>
+        <p>
+          Receipts live on Portfolio (latest / featured slip) and in personal history under
+          Distributions → Your activity. They are proof of what the hall paid
+          <em>you</em> — stocks, not more $HOOD.
+        </p>
+      </article>
+
+      <article class="section" id="contracts">
+        <div class="form-head">
+          <span class="form-id">§6 · Contracts</span>
+          <span class="form-meta">On-chain components</span>
+        </div>
+        <h2 class="section-title">Contract roster</h2>
+        <p class="section-note">
+          Addresses marked “—” are filled in after deploy. Chain primitives below are live on Robinhood Chain.
+        </p>
+        <div class="table-wrap">
+          <table class="ledger">
+            <thead>
+              <tr>
+                <th>Contract</th>
+                <th>Role</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody data-contracts-body></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="docs-prose section" id="data">
+        <div class="form-head">
+          <span class="form-id">§7 · Data sources</span>
+          <span class="form-meta">What powers the UI</span>
+        </div>
+        <h2 class="section-title">Where numbers come from</h2>
+        <ul class="data-source-list">
+          <li>
+            <span class="src-name">ReflectionToken</span>
+            <span class="src-detail">$HOOD balances, holder list (any positive balance).</span>
+          </li>
+          <li>
+            <span class="src-name">IndexFeeHook · StockTreasury</span>
+            <span class="src-detail">Fees collected, treasury ETH, stock purchase events.</span>
+          </li>
+          <li>
+            <span class="src-name">StockDistributor</span>
+            <span class="src-detail">Cycle timing, batch distribution events, member receipts.</span>
+          </li>
+          <li>
+            <span class="src-name">Uniswap V4 PoolManager</span>
+            <span class="src-detail">$HOOD / ETH quote for price metrics and swap UI.</span>
+          </li>
+          <li>
+            <span class="src-name">Stock token pools</span>
+            <span class="src-detail">Per-asset prices on the dividend board.</span>
+          </li>
+          <li>
+            <span class="src-name">Blockscout (Robinhood Chain)</span>
+            <span class="src-detail">Transaction links for every ledger row.</span>
+          </li>
+          <li>
+            <span class="src-name">App mock layer (pre-launch)</span>
+            <span class="src-detail">
+              Until RPC wiring lands, <code>js/mock-data.js</code> supplies demo figures
+              so Union Books can be reviewed end-to-end.
+            </span>
+          </li>
+        </ul>
+      </article>
+
+      <article class="docs-prose section" id="app">
+        <div class="form-head">
+          <span class="form-id">§8 · App map</span>
+          <span class="form-meta">Tabs + community</span>
+        </div>
+        <h2 class="section-title">What each tab is for</h2>
+        <ul>
+          <li><strong>Books</strong> — Union Books home: statement of accounts, latest run, membership office, board, recent runs.</li>
+          <li><strong>Swap</strong> — Buy $HOOD. Closed until launch; live desk after pool + config are set.</li>
+          <li><strong>Portfolio</strong> — Your balance, share, stocks earned, membership dividend receipt.</li>
+          <li><strong>Distributions</strong> — Full history: dividend runs, treasury buys, your activity. Rows → txs.</li>
+          <li><strong>Docs</strong> — This brief (fee story, books, receipts).</li>
+          <li><strong>Union Hall</strong> — Telegram community (not an app tab). Link in the footer when configured.</li>
+        </ul>
+        <p>
+          <strong>Clock in</strong> verifies membership for personal panels.
+          Wallet connect replaces the local mock before go-live.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="hall.html">Open Union Books</a>
+          <a class="btn btn-secondary" href="distributions.html">View distributions</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p class="mark">Local 4663 · International Brotherhood of Hoodsters</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="hall.html">Books</a>
+        <a href="swap.html">Swap</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="distributions.html">Distributions</a>
+        <a href="docs.html">Docs</a>
+        <a href="#" data-union-hall target="_blank" rel="noopener noreferrer">Union Hall</a>
+        <a href="pledge/">Pledge</a>
+      </nav>
+      <p>
+        Informational only; not financial, legal, tax, or investment advice.
+        Distributions are tokenized stock tokens, not brokerage shares; they do not grant
+        voting rights in the underlying issuers.
+      </p>
+      <p>Operates on Robinhood Chain. © Local 4663</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+  <script src="js/mock-data.js?v=testnet"></script>
+  <script src="js/chain.js?v=testnet"></script>
+  <script src="js/wallet.js?v=testnet"></script>
+  <script src="js/live.js?v=testnet"></script>
+  <script src="js/hall.js?v=testnet"></script>
+</body>
+</html>
