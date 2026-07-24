@@ -41,7 +41,7 @@ window.IBH.config = {
    * WalletConnect (Reown) Cloud project id — free at https://cloud.walletconnect.com
    * Required for the WalletConnect option in the multi-wallet picker.
    */
-  walletConnectProjectId: "",
+  walletConnectProjectId: "d480e505a2622525efe2ea6ada496e5d",
   /**
    * Community: Union Hall lives on Telegram (not a product tab).
    * Set to full https://t.me/... URL when ready; footer “Union Hall” uses this.
