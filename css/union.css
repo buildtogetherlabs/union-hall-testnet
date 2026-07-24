@@ -2001,3 +2001,104 @@ table.ledger tr.is-link:hover td {
 body.has-site-banner .topbar {
   /* banner sits above sticky header flow */
 }
+
+/* ── Multi-wallet picker ─────────────────────────────────────────────────── */
+body.wallet-modal-open {
+  overflow: hidden;
+}
+.wallet-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(28, 28, 28, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.wallet-modal {
+  width: min(420px, 100%);
+  background: var(--paper);
+  border: 2px solid var(--rule-heavy);
+  box-shadow: 4px 4px 0 rgba(28, 28, 28, 0.12);
+}
+.wallet-modal .panel-banner {
+  background: var(--burgundy);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--rule-heavy);
+}
+.wallet-modal-body {
+  padding: 18px 16px 16px;
+}
+.wallet-modal-body h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.wallet-modal-body > .muted {
+  margin: 0 0 14px;
+  font-size: 12px;
+}
+.wallet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.wallet-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 12px;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  font-family: var(--font);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.wallet-option:hover,
+.wallet-option:focus-visible {
+  border-color: var(--burgundy);
+  background: #fff;
+  outline: none;
+}
+.wallet-option.is-missing {
+  opacity: 0.85;
+}
+.wallet-option-icon {
+  font-size: 22px;
+  width: 32px;
+  text-align: center;
+  line-height: 1;
+}
+.wallet-option-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.wallet-option-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.wallet-option-status {
+  font-size: 11px;
+  color: var(--muted);
+}
+.wallet-option-chevron {
+  color: var(--burgundy);
+  font-weight: 700;
+}
+.wallet-modal-cancel {
+  width: 100%;
+}

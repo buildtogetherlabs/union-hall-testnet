@@ -38,6 +38,11 @@ window.IBH.config = {
   /** Permanent PoolSwapTest on testnet (also set by chain.js applyTestnetConfig). Empty in demo mode. */
   swapRouter: "0x374E47C3ca1b06f4C58b1aB5d67Bf74903f17884",
   /**
+   * WalletConnect (Reown) Cloud project id — free at https://cloud.walletconnect.com
+   * Required for the WalletConnect option in the multi-wallet picker.
+   */
+  walletConnectProjectId: "",
+  /**
    * Community: Union Hall lives on Telegram (not a product tab).
    * Set to full https://t.me/... URL when ready; footer “Union Hall” uses this.
    */

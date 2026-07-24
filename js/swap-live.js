@@ -163,15 +163,26 @@ window.IBH = window.IBH || {};
     if (connectBtn) {
       connectBtn.addEventListener("click", function (e) {
         e.preventDefault();
-        setStatus(statusEl, "Connecting…", "is-pending");
+        setStatus(statusEl, "Choose a wallet…", "is-pending");
         window.IBH.wallet
-          .connect()
+          .connect({ forcePicker: true })
           .then(function () {
-            setStatus(statusEl, "Wallet connected on " + window.IBH.chain.chainName, "is-ok");
+            var s = window.IBH.wallet.getState();
+            var label = s.walletName ? s.walletName + " · " : "";
+            setStatus(
+              statusEl,
+              label + "Connected on " + window.IBH.chain.chainName,
+              "is-ok"
+            );
             refreshWalletUi();
           })
           .catch(function (err) {
-            setStatus(statusEl, err.message || String(err), "is-error");
+            var msg = err && err.message ? err.message : String(err);
+            if (/cancel/i.test(msg)) {
+              setStatus(statusEl, "", null);
+              return;
+            }
+            setStatus(statusEl, msg, "is-error");
           });
       });
     }

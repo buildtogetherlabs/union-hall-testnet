@@ -778,9 +778,9 @@
             return;
           }
           btn.disabled = true;
-          btn.textContent = "Connecting…";
+          btn.textContent = "Choose wallet…";
           wallet
-            .connect()
+            .connect({ forcePicker: true })
             .then(function (addr) {
               if (!addr) throw new Error("No account returned");
               setClockedIn(true);
